@@ -36,6 +36,7 @@ object GenerateLogData:
   Try(Await.result(logFuture, Parameters.runDurationInMinutes)) match {
     case Success(value) => {
       logger.info(s"Log data generation has completed after generating ${Parameters.maxCount} records.")
+      // upload the logs to S3 once the log generator is done processing
       PushLogsToS3.uploadLogs()
     }
     case Failure(exception) => logger.info(s"Log data generation has completed within the allocated time, ${Parameters.runDurationInMinutes}")
