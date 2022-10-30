@@ -1,3 +1,4 @@
+
 name := "LogFileGenerator"
 
 version := "0.1"
@@ -23,5 +24,12 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % scalacticVersion % Test,
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
   "com.typesafe" % "config" % typesafeConfigVersion,
-  "com.github.mifmif" % "generex" % generexVersion
+  "com.github.mifmif" % "generex" % generexVersion,
+  "com.amazonaws" % "aws-java-sdk-s3" % "1.12.90",
+  "org.unix4j" % "unix4j-command" % "0.4",
+  "javax.xml.bind" % "jaxb-api" % "2.3.1"
 )
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}

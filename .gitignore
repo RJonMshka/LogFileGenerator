@@ -8,6 +8,7 @@ out/
 
 *.log
 *.iml
+hashtable.txt
 *.ipr
 *.iws
 .idea

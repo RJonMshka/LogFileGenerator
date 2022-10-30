@@ -34,7 +34,10 @@ object GenerateLogData:
     LogMsgSimulator(init(RandomStringGenerator((Parameters.minStringLength, Parameters.maxStringLength), Parameters.randomSeed)), Parameters.maxCount)
   }
   Try(Await.result(logFuture, Parameters.runDurationInMinutes)) match {
-    case Success(value) => logger.info(s"Log data generation has completed after generating ${Parameters.maxCount} records.")
+    case Success(value) => {
+      logger.info(s"Log data generation has completed after generating ${Parameters.maxCount} records.")
+      PushLogsToS3.uploadLogs()
+    }
     case Failure(exception) => logger.info(s"Log data generation has completed within the allocated time, ${Parameters.runDurationInMinutes}")
   }
 

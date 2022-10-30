@@ -8,15 +8,19 @@
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- Daily rollover -->
             <fileNamePattern>log/LogFileGenerator.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>4MB</maxFileSize>
-            <maxHistory>100</maxHistory>
+            <!-- each archived file's size will be max 10MB -->
+            <maxFileSize>100KB</maxFileSize>
+            <!-- 30 days to keep -->
+            <maxHistory>30</maxHistory>
+            <!-- total size of all archive files, if total size > 100GB, it will delete old archived file -->
+            <totalSizeCap>100GB</totalSizeCap>
         </rollingPolicy>
 
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
+
     </appender>
 
     <!-- Configure so that it outputs to both console and log file -->
